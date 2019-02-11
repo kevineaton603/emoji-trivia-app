@@ -42,13 +42,13 @@
         <!--QuizController-->
         <scene sceneID="mGF-xf-8CU">
             <objects>
-                <viewController title="QuizController" id="lSu-3P-wo5" customClass="QuizMainController" customModule="emoji_quiz" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="QuizController" id="lSu-3P-wo5" customClass="QuizController" customModule="emoji_quiz" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IF2-2d-yzP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="yPd-Ge-1IT">
-                                <rect key="frame" x="37.5" y="150" width="300" height="29"/>
+                                <rect key="frame" x="37.5" y="81" width="300" height="29"/>
                                 <segments>
                                     <segment title="Countries"/>
                                     <segment title="Movies"/>
@@ -57,18 +57,12 @@
                                     <action selector="indexChanged:" destination="lSu-3P-wo5" eventType="valueChanged" id="E3S-gH-tle"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSF-Ox-ql0">
-                                <rect key="frame" x="166.5" y="186" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3q-77-vPq">
                                 <rect key="frame" x="172" y="518" width="30" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Play"/>
                                 <connections>
-                                    <segue destination="485-U4-hMW" kind="show" id="a7V-qE-HDX"/>
+                                    <segue destination="485-U4-hMW" kind="show" id="QBL-1Z-IDh"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lives: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHH-BX-dKY">
@@ -107,18 +101,24 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NSF-Ox-ql0">
+                                <rect key="frame" x="166.5" y="117" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="yPd-Ge-1IT" firstAttribute="width" secondItem="IF2-2d-yzP" secondAttribute="width" multiplier="0.8" id="4AS-ab-R4D"/>
+                            <constraint firstItem="yPd-Ge-1IT" firstAttribute="top" secondItem="obm-2B-pL1" secondAttribute="top" constant="17" id="EpG-IM-bKK"/>
                             <constraint firstItem="NSF-Ox-ql0" firstAttribute="centerX" secondItem="obm-2B-pL1" secondAttribute="centerX" id="T7G-1X-eq4"/>
-                            <constraint firstItem="obm-2B-pL1" firstAttribute="bottom" secondItem="NSF-Ox-ql0" secondAttribute="bottom" constant="411" id="dEe-JM-jNv"/>
                             <constraint firstItem="yPd-Ge-1IT" firstAttribute="centerX" secondItem="obm-2B-pL1" secondAttribute="centerX" id="fcZ-4m-Cgx"/>
-                            <constraint firstItem="obm-2B-pL1" firstAttribute="bottom" secondItem="yPd-Ge-1IT" secondAttribute="bottom" constant="440" id="yAl-cO-spH"/>
+                            <constraint firstItem="NSF-Ox-ql0" firstAttribute="top" secondItem="obm-2B-pL1" secondAttribute="top" constant="53" id="l53-bh-6qM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="obm-2B-pL1"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Quiz" id="Kvl-wp-qyf"/>
+                    <navigationItem key="navigationItem" id="wEj-x1-xYL"/>
                     <connections>
                         <outlet property="QuizNameLabel" destination="NSF-Ox-ql0" id="T86-TG-PUL"/>
                         <outlet property="QuizSelectorSegment" destination="yPd-Ge-1IT" id="B5Y-X1-4Oi"/>
@@ -126,7 +126,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6w9-Fg-pF8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="485.60000000000002" y="-529.38530734632684"/>
+            <point key="canvasLocation" x="1424.8" y="-529.38530734632684"/>
         </scene>
         <!--Quiz Game Controller-->
         <scene sceneID="Sj7-Wn-NJM">
@@ -137,14 +137,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Lives:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EtM-i3-WmN">
-                                <rect key="frame" x="16" y="137" width="45" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="❤️❤️❤️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D8F-m6-t9q">
-                                <rect key="frame" x="69" y="137" width="69" height="21"/>
+                                <rect key="frame" x="16" y="64" width="45" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -157,6 +150,13 @@
                                     <navigationItem title="Title" id="Y35-Il-doX"/>
                                 </items>
                             </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="❤️❤️❤️" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D8F-m6-t9q">
+                                <rect key="frame" x="69" y="63" width="69" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="pXt-1o-GrQ"/>
@@ -164,25 +164,45 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="clh-Gv-NB7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1235" y="-524"/>
+            <point key="canvasLocation" x="2173.5999999999999" y="-524.8875562218891"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="l7i-DL-kgH">
             <objects>
                 <tabBarController id="Z3f-F8-jBa" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="Bte-vd-wXh"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fp6-Uf-hqG">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="lSu-3P-wo5" kind="relationship" relationship="viewControllers" id="V7m-Db-GYa"/>
+                        <segue destination="t6J-eZ-7UW" kind="relationship" relationship="viewControllers" id="V7m-Db-GYa"/>
                         <segue destination="88a-Tz-vba" kind="relationship" relationship="viewControllers" id="vjc-Vw-DJT"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CF4-Jp-bGR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-466" y="-197"/>
+        </scene>
+        <!--Quiz-->
+        <scene sceneID="Ty4-BR-aqG">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="t6J-eZ-7UW" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Quiz" id="Kvl-wp-qyf"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="1Vo-xw-qsT">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="lSu-3P-wo5" kind="relationship" relationship="rootViewController" id="hiE-U4-aFM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CPe-jx-jdd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="485.60000000000002" y="-529.38530734632684"/>
         </scene>
     </scenes>
 </document>

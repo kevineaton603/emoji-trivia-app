@@ -9,40 +9,78 @@
 import UIKit
 import FirebaseDatabase
 
-class QuizMainController: UIViewController {
+class QuizController: UIViewController {
     @IBOutlet weak var QuizSelectorSegment: UISegmentedControl!
     @IBOutlet weak var QuizNameLabel: UILabel!
     var ref: DatabaseReference!
     var quiz: Quiz = Quiz()
+    var countries: [Question] =  [Question]()
+    var movies: [Question] =  [Question]()
+    var games: [Question] =  [Question]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.ref = Database.database().reference()
-        quiz.addQuestion(q: Question(mAnswer: "canada", mHint:"🇨🇦"))
+        quiz.addQuestion(q: Question(mAnswer: "canada", mHint:"🍁🇨🇦"))
+        countries.append(quiz.getQuestion(index: 0))
+        countries.append(Question(mAnswer: "America", mHint: "🦅🏈"))
+        countries.append(Question(mAnswer: "United Kingdom", mHint: "☕️💂‍♂️"))
+        countries.append(Question(mAnswer: "Dominican Republic", mHint: "🇩🇴"))
+        countries.append(Question(mAnswer: "Italy", mHint: "🍕🍝"))
+        
+        movies.append(Question(mAnswer: "Jaws", mHint: "🦈⛵️"))
+        movies.append(Question(mAnswer: "The Exorcist", mHint: "🧟‍♀️⛪️"))
+        movies.append(Question(mAnswer: "Batman", mHint: "🦇🤵"))
+        movies.append(Question(mAnswer: "Jurassic Park", mHint: "🦖🎟"))
+        movies.append(Question(mAnswer: "Ghostbusters", mHint: "👻🚫"))
+        
+        games.append(Question(mAnswer: "Wii Sports", mHint: "🎳🏌️‍♂️"))
+        games.append(Question(mAnswer: "Skyrim", mHint: "🧙‍♂️⚔️"))
+        games.append(Question(mAnswer: "Minecraft", mHint: "⛏🛠"))
+        games.append(Question(mAnswer: "Assassin's Creed", mHint: "🗡🙏"))
+        games.append(Question(mAnswer: "Rocket League", mHint: "🚀⚽️"))
+        
+
         //How to store encode data to send to FireBase
-        var json: [String: Any] = [String: Any]()
-        var jsonData: Data=Data()
+        let questions: [String: [Question]] = [
+            "countries": countries,
+            "movies": movies,
+            "games": games
+        ]
+        var jsonQuestions: [String: Any] = [String:Any]()
+        //var json: [String: Any] = [String: Any]()
+        //var jsonData: Data=Data()
+        var jsonDataQuestions: Data=Data()
         do{
             //create encoder then encode
             let jsonEncoder = JSONEncoder()
-            jsonData = try jsonEncoder.encode(quiz)
+            //jsonData = try jsonEncoder.encode(quiz)
             //Use this is serialize to jsonObject
-            json = try JSONSerialization.jsonObject(with: jsonData, options:[]) as! [String: Any]
+            jsonDataQuestions = try jsonEncoder.encode(questions)
+            jsonQuestions = try JSONSerialization.jsonObject(with: jsonDataQuestions, options: []) as! [String: Any]
+            //json = try JSONSerialization.jsonObject(with: jsonData, options:[]) as! [String: Any]
             //How to decode information from FireBase will be used later
-            let jsonDecoder = JSONDecoder()
-            let quizinfo = try jsonDecoder.decode(Quiz.self, from: jsonData)
-            print(quizinfo.getQuestion(index: 0).mAnswer)
+            //let jsonDecoder = JSONDecoder()
+            //let quizinfo = try jsonDecoder.decode(Quiz.self, from: jsonData)
+            //print(quizinfo.getQuestion(index: 0).mAnswer)
         } catch {
             print(error.localizedDescription)
         }
         //set values to Firebase
-        self.ref.child("question").setValue(json)
-        self.ref.child("questions").setValue(["questions": "america"])
+        //self.ref.child("question").setValue(json)
+        self.ref.child("questions").setValue(jsonQuestions)
         //get values from Firebase
         self.ref.child("questions").observeSingleEvent(of: .value, with: {(snapshot) in
-            let value = snapshot.value as? NSDictionary
-            let username = value?["username"] as? String ?? ""
-            print(username)
+            if let value = snapshot.value as? [String: NSArray]{
+                print(value)
+                //let jsonDecoder = JSONDecoder()
+                let countries = questions["countries"] ?? [Question]()
+                print(countries as Any)
+                
+            } else {
+                print("Value Error\n\n")
+            }
+            
         }) { (error) in
             print(error)
             print(error.localizedDescription)
