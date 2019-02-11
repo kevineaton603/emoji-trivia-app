@@ -1,0 +1,6 @@
+framework module Pods_emoji_quiz {
+  umbrella header "Pods-emoji-quiz-umbrella.h"
+
+  export *
+  module * { export * }
+}

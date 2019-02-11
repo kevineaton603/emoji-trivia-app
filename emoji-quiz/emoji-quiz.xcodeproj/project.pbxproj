@@ -7,23 +7,31 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8F1A205F240F42F043A1CE94 /* Pods_emoji_quiz.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB6B348B95ECC31E473F680 /* Pods_emoji_quiz.framework */; };
 		D338A7412210E02500D0BF96 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D338A7402210E02500D0BF96 /* AppDelegate.swift */; };
-		D338A7432210E02500D0BF96 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D338A7422210E02500D0BF96 /* ViewController.swift */; };
+		D338A7432210E02500D0BF96 /* QuizController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D338A7422210E02500D0BF96 /* QuizController.swift */; };
 		D338A7462210E02500D0BF96 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D338A7442210E02500D0BF96 /* Main.storyboard */; };
 		D338A7482210E02600D0BF96 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D338A7472210E02600D0BF96 /* Assets.xcassets */; };
 		D338A74B2210E02600D0BF96 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D338A7492210E02600D0BF96 /* LaunchScreen.storyboard */; };
 		D338A7532210E44000D0BF96 /* quiz.swift in Sources */ = {isa = PBXBuildFile; fileRef = D338A7522210E44000D0BF96 /* quiz.swift */; };
+		D3918F6422112CD60036F3B1 /* QuizGameController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3918F6322112CD60036F3B1 /* QuizGameController.swift */; };
+		D3FB204122110998009C91A1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D3FB204022110998009C91A1 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		64DC22E75B32923DD789F881 /* Pods-emoji-quiz.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-emoji-quiz.release.xcconfig"; path = "Target Support Files/Pods-emoji-quiz/Pods-emoji-quiz.release.xcconfig"; sourceTree = "<group>"; };
+		8D8884D30EE4DA6098E41C01 /* Pods-emoji-quiz.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-emoji-quiz.debug.xcconfig"; path = "Target Support Files/Pods-emoji-quiz/Pods-emoji-quiz.debug.xcconfig"; sourceTree = "<group>"; };
+		AEB6B348B95ECC31E473F680 /* Pods_emoji_quiz.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_emoji_quiz.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D338A73D2210E02500D0BF96 /* emoji-quiz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "emoji-quiz.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D338A7402210E02500D0BF96 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D338A7422210E02500D0BF96 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		D338A7422210E02500D0BF96 /* QuizController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizController.swift; sourceTree = "<group>"; };
 		D338A7452210E02500D0BF96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		D338A7472210E02600D0BF96 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D338A74A2210E02600D0BF96 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D338A74C2210E02600D0BF96 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D338A7522210E44000D0BF96 /* quiz.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = quiz.swift; sourceTree = "<group>"; };
+		D3918F6322112CD60036F3B1 /* QuizGameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizGameController.swift; sourceTree = "<group>"; };
+		D3FB204022110998009C91A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +39,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8F1A205F240F42F043A1CE94 /* Pods_emoji_quiz.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +51,8 @@
 			children = (
 				D338A73F2210E02500D0BF96 /* emoji-quiz */,
 				D338A73E2210E02500D0BF96 /* Products */,
+				DB046BA825F6A907CCC36967 /* Pods */,
+				E0907ADA1BE5ECEE5FEBC479 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -57,14 +68,33 @@
 			isa = PBXGroup;
 			children = (
 				D338A7402210E02500D0BF96 /* AppDelegate.swift */,
-				D338A7422210E02500D0BF96 /* ViewController.swift */,
+				D338A7422210E02500D0BF96 /* QuizController.swift */,
 				D338A7442210E02500D0BF96 /* Main.storyboard */,
 				D338A7472210E02600D0BF96 /* Assets.xcassets */,
 				D338A7492210E02600D0BF96 /* LaunchScreen.storyboard */,
 				D338A74C2210E02600D0BF96 /* Info.plist */,
+				D3FB204022110998009C91A1 /* GoogleService-Info.plist */,
 				D338A7522210E44000D0BF96 /* quiz.swift */,
+				D3918F6322112CD60036F3B1 /* QuizGameController.swift */,
 			);
 			path = "emoji-quiz";
+			sourceTree = "<group>";
+		};
+		DB046BA825F6A907CCC36967 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8D8884D30EE4DA6098E41C01 /* Pods-emoji-quiz.debug.xcconfig */,
+				64DC22E75B32923DD789F881 /* Pods-emoji-quiz.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		E0907ADA1BE5ECEE5FEBC479 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AEB6B348B95ECC31E473F680 /* Pods_emoji_quiz.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +104,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = D338A74F2210E02600D0BF96 /* Build configuration list for PBXNativeTarget "emoji-quiz" */;
 			buildPhases = (
+				D24BE46292DBB0B697B46B69 /* [CP] Check Pods Manifest.lock */,
 				D338A7392210E02500D0BF96 /* Sources */,
 				D338A73A2210E02500D0BF96 /* Frameworks */,
 				D338A73B2210E02500D0BF96 /* Resources */,
+				0331C182063D418D4976CB1F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -126,6 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D338A74B2210E02600D0BF96 /* LaunchScreen.storyboard in Resources */,
+				D3FB204122110998009C91A1 /* GoogleService-Info.plist in Resources */,
 				D338A7482210E02600D0BF96 /* Assets.xcassets in Resources */,
 				D338A7462210E02500D0BF96 /* Main.storyboard in Resources */,
 			);
@@ -133,13 +166,65 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		0331C182063D418D4976CB1F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-emoji-quiz/Pods-emoji-quiz-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-emoji-quiz/Pods-emoji-quiz-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D24BE46292DBB0B697B46B69 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-emoji-quiz-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D338A7392210E02500D0BF96 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D338A7432210E02500D0BF96 /* ViewController.swift in Sources */,
+				D338A7432210E02500D0BF96 /* QuizController.swift in Sources */,
 				D338A7412210E02500D0BF96 /* AppDelegate.swift in Sources */,
+				D3918F6422112CD60036F3B1 /* QuizGameController.swift in Sources */,
 				D338A7532210E44000D0BF96 /* quiz.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,6 +369,7 @@
 		};
 		D338A7502210E02600D0BF96 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8D8884D30EE4DA6098E41C01 /* Pods-emoji-quiz.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -301,6 +387,7 @@
 		};
 		D338A7512210E02600D0BF96 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 64DC22E75B32923DD789F881 /* Pods-emoji-quiz.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
