@@ -12,6 +12,9 @@ import FirebaseDatabase
 class QuizController: UIViewController {
     @IBOutlet weak var QuizSelectorSegment: UISegmentedControl!
     @IBOutlet weak var QuizNameLabel: UILabel!
+    @IBOutlet weak var LivesLabel: UILabel!
+    @IBOutlet weak var QuestionLabel: UILabel!
+    
     var ref: DatabaseReference!
     var quiz: Quiz = Quiz()
     var countries: [Question] =  [Question]()
@@ -22,7 +25,7 @@ class QuizController: UIViewController {
         super.viewDidLoad()
         self.ref = Database.database().reference()
         quiz.addQuestion(q: Question(mAnswer: "canada", mHint:"🍁🇨🇦"))
-        countries.append(quiz.getQuestion(index: 0))
+        /*countries.append(quiz.getQuestion(index: 0))
         countries.append(Question(mAnswer: "America", mHint: "🦅🏈"))
         countries.append(Question(mAnswer: "United Kingdom", mHint: "☕️💂‍♂️"))
         countries.append(Question(mAnswer: "Dominican Republic", mHint: "🇩🇴"))
@@ -67,15 +70,20 @@ class QuizController: UIViewController {
             print(error.localizedDescription)
         }
         //set values to Firebase
-        //self.ref.child("question").setValue(json)
-        self.ref.child("questions").setValue(jsonQuestions)
+        self.ref.child("questions").setValue(jsonQuestions)*/
         //get values from Firebase
         self.ref.child("questions").observeSingleEvent(of: .value, with: {(snapshot) in
             if let value = snapshot.value as? [String: NSArray]{
                 print(value)
                 //let jsonDecoder = JSONDecoder()
-                let countries = questions["countries"] ?? [Question]()
-                print(countries as Any)
+                let countries = value["countries"]
+                var questions = [Question]()
+                for country in countries ?? NSArray() {
+                    print(country)
+                    let question = country as! NSDictionary
+                    questions.append(Question(mAnswer: question.value(forKey: "mAnswer") as! String, mHint: question.value(forKey: "mHint") as! String))
+                }
+                print(questions)
                 
             } else {
                 print("Value Error\n\n")

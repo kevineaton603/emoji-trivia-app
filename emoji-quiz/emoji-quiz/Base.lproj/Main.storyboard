@@ -120,6 +120,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="wEj-x1-xYL"/>
                     <connections>
+                        <outlet property="LivesLabel" destination="gmG-5y-Ink" id="Jrb-h5-McV"/>
+                        <outlet property="QuestionLabel" destination="1o8-fV-haG" id="uLK-ju-Dx3"/>
                         <outlet property="QuizNameLabel" destination="NSF-Ox-ql0" id="T86-TG-PUL"/>
                         <outlet property="QuizSelectorSegment" destination="yPd-Ge-1IT" id="B5Y-X1-4Oi"/>
                     </connections>
@@ -157,10 +159,29 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZFa-FU-cjL">
+                                <rect key="frame" x="58" y="198" width="259" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="71"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="_ _ _ _ _ _" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="olE-Tq-E52">
+                                <rect key="frame" x="58" y="313" width="259" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="olE-Tq-E52" firstAttribute="width" secondItem="2Qg-Mv-asO" secondAttribute="width" id="LGh-Mq-VBU"/>
+                            <constraint firstItem="ZFa-FU-cjL" firstAttribute="width" secondItem="2Qg-Mv-asO" secondAttribute="width" multiplier="0.8" id="YSl-h4-rJ3"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="pXt-1o-GrQ"/>
                     </view>
+                    <connections>
+                        <outlet property="LivesLabel" destination="D8F-m6-t9q" id="kTS-io-Dv7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="clh-Gv-NB7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

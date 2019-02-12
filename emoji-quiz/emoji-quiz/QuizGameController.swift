@@ -10,6 +10,7 @@ import UIKit
 
 class QuizGameController: UIViewController {
 
+    @IBOutlet weak var LivesLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
 
