@@ -14,10 +14,12 @@ struct Question: Codable {
 }
 //Extends to Codable to be convert to JSON later
 struct Quiz: Codable{
-    var mUsername: String=""
+    var mName: String=""
     var mLives: Int=3
     var mScore: Int=0
     var mQuestions: [Question]=[]
+    var currentQuestion: Int = 0
+    var letterGuessed: String = ""
     //Question Methods
     mutating func addQuestion(q: Question)->Void{
         self.mQuestions.append(q)
@@ -31,12 +33,12 @@ struct Quiz: Codable{
     func getQuestion(index: Int)->Question{
         return self.mQuestions[index]
     }
-    //Username Methods
-    mutating func setUsername(username: String){
-        self.mUsername = username
+    //Name Methods
+    mutating func setName(name: String){
+        self.mName = name
     }
-    func getUsername()->String{
-        return self.mUsername
+    func getName()->String{
+        return self.mName
     }
     //Live Methods
     mutating func setLives(lives: Int)->Void{
@@ -54,7 +56,7 @@ struct Quiz: Codable{
     }
     //Reset Quiz Method
     mutating func reset(){
-        mUsername = ""
+        mName = ""
         mLives = 3
         mScore = 0
         clearQuestions()

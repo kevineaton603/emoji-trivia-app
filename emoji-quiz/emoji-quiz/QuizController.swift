@@ -72,7 +72,7 @@ class QuizController: UIViewController {
         //set values to Firebase
         self.ref.child("questions").setValue(jsonQuestions)*/
         //get values from Firebase
-        self.ref.child("questions").observeSingleEvent(of: .value, with: {(snapshot) in
+        /*self.ref.child("questions").observeSingleEvent(of: .value, with: {(snapshot) in
             if let value = snapshot.value as? [String: NSArray]{
                 print(value)
                 //let jsonDecoder = JSONDecoder()
@@ -92,7 +92,7 @@ class QuizController: UIViewController {
         }) { (error) in
             print(error)
             print(error.localizedDescription)
-        }
+        }*/
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -114,6 +114,13 @@ class QuizController: UIViewController {
             QuizNameLabel.text = "Games"
         default:
             break
+        }
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.destination is QuizGameController{
+            let vc = segue.destination as! QuizGameController
+            let name = QuizNameLabel.text?.lowercased() ?? "movies"
+            vc.quizName = name
         }
     }
     
