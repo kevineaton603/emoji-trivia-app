@@ -9,30 +9,54 @@
 import UIKit
 import FirebaseDatabase
 
-class HighScoreViewController: UIViewController {
+class HighScoreViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
+{
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.HighScoreList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        print("In Table View")
+        var cell: UITableViewCell = self.HighScoreTable.dequeueReusableCell(withIdentifier: "cell") as! UITableViewCell
+        let cellInfo = self.HighScoreList[indexPath.row]
+        print(cellInfo["Name"] ?? "")
+        print(cellInfo["Score"] ?? "")
+        cell.textLabel?.text = cellInfo["Name"]! + "  " + cellInfo["Score"]!
+        return cell
+    }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
+    
 
+    @IBOutlet weak var HighScoreTable: UITableView!
     @IBOutlet weak var HighScores: UILabel!
     @IBOutlet weak var QuizSelectorSegment: UISegmentedControl!
     var databaseRef: DatabaseReference!
+    var HighScoreList: [[String: String]] = [[String: String]]()
     override func viewDidLoad() {
         super.viewDidLoad()
         databaseRef = Database.database().reference()
+        updateView(selector: "Countries")
+        HighScoreTable.delegate = self
+        HighScoreTable.dataSource = self
+        self.HighScoreTable.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
 
-        
-        // Do any additional setup after loading the view.
-    }
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
         if (QuizSelectorSegment.numberOfSegments != 3){
             QuizSelectorSegment.insertSegment(withTitle: "Games", at: 2, animated: true)
         }
+        // Do any additional setup after loading the view.
     }
-
-    @IBAction func SelectorTap(_ sender: UISegmentedControl) {
-        let quizName = sender.titleForSegment(at: sender.selectedSegmentIndex)
-        print(quizName ?? "Nope")
-        let quizHighScore = self.databaseRef.child("score").child(quizName!.lowercased() as String)
-        var scoresDisplay = ""
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+    }
+    func updateView(selector: String){
+        let quizHighScore = self.databaseRef.child("score").child(selector.lowercased() as String)
+        self.HighScoreList.removeAll()
         quizHighScore.observeSingleEvent(of: .value, with: {(snapshot) in
             if let value = snapshot.value as? [String: Any]{
                 for (index, element) in value.enumerated(){
@@ -40,22 +64,30 @@ class HighScoreViewController: UIViewController {
                     let info = element.value as! NSDictionary
                     let name = info.value(forKey: "Name") as! String
                     let score = info.value(forKey: "Score") as! String
-                    scoresDisplay += (name + "\t" + score + "\n")
+                    self.HighScoreList.append(["Name": name, "Score": score])
                     print(info.value(forKey: "Name")!)
                     
                 }
-                print(scoresDisplay)
-                self.HighScores.text=scoresDisplay
+                if self.HighScoreList.count >= 2 {
+                    self.HighScoreList = self.HighScoreList.sorted{$0["Score"]! > $1["Score"]!}
+                }
+                print(self.HighScoreList)
+                self.HighScoreTable.reloadData()
                 
             } else {
-                self.HighScores.text="No High Scores Yet"
+                self.HighScoreList.append(["Name": "No High Score Yet", "Score": ""])
                 print("Value Error\n\n")
+                self.HighScoreTable.reloadData()
             }
             
         }) { (error) in
             print(error)
             print(error.localizedDescription)
         }
+    }
+    @IBAction func SelectorTap(_ sender: UISegmentedControl) {
+        let quizName = sender.titleForSegment(at: sender.selectedSegmentIndex)
+        updateView(selector: quizName as! String)
     }
 
 }

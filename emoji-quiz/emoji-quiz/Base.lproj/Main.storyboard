@@ -29,26 +29,49 @@
                                     <action selector="indexChanged:" destination="lSu-3P-wo5" eventType="valueChanged" id="JKp-GI-VYO"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="High Scores" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WHK-41-yUz">
-                                <rect key="frame" x="16" y="102" width="343" height="516"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EoF-AT-IJm">
+                                <rect key="frame" x="0.0" y="102" width="375" height="516"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="iKf-R9-Wqo">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iKf-R9-Wqo" id="26j-QZ-t8V">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="pgV-21-Be3">
+                                        <rect key="frame" x="0.0" y="72" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="pgV-21-Be3" id="qBj-9y-D8u">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="VMl-0m-rmY">
+                                        <rect key="frame" x="0.0" y="116" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VMl-0m-rmY" id="69a-pV-WFZ">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="zeK-dk-2ht" firstAttribute="top" secondItem="FTi-Cf-fLJ" secondAttribute="top" constant="46" id="VV6-O7-tf4"/>
-                            <constraint firstItem="WHK-41-yUz" firstAttribute="width" secondItem="WES-n1-YcQ" secondAttribute="width" multiplier="0.9" id="WCc-yt-dSL"/>
-                            <constraint firstItem="WHK-41-yUz" firstAttribute="centerX" secondItem="FTi-Cf-fLJ" secondAttribute="centerX" id="hB1-dr-azt"/>
                             <constraint firstItem="zeK-dk-2ht" firstAttribute="centerX" secondItem="FTi-Cf-fLJ" secondAttribute="centerX" id="yAX-lP-pOI"/>
-                            <constraint firstItem="WHK-41-yUz" firstAttribute="top" secondItem="FTi-Cf-fLJ" secondAttribute="top" constant="82" id="zle-tz-zlb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FTi-Cf-fLJ"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="High Score" image="HIghScore" id="qiX-Rs-s64"/>
                     <connections>
-                        <outlet property="HighScores" destination="WHK-41-yUz" id="jqK-Fu-8rp"/>
+                        <outlet property="HighScoreTable" destination="EoF-AT-IJm" id="2D9-4G-ySH"/>
                         <outlet property="QuizSelectorSegment" destination="zeK-dk-2ht" id="U0J-33-KWY"/>
                     </connections>
                 </viewController>
@@ -117,7 +140,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ovk-2h-MdM">
-                                <rect key="frame" x="136" y="541" width="102" height="30"/>
+                                <rect key="frame" x="136.5" y="541" width="102" height="30"/>
                                 <state key="normal" title="Take The Quiz!"/>
                                 <connections>
                                     <segue destination="485-U4-hMW" kind="show" id="IfP-nf-ldM"/>

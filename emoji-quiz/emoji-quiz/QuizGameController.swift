@@ -25,11 +25,12 @@ class QuizGameController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         print(quizName)
+        if(numberOfLives < quiz.mLives){
+            quiz.mLives = numberOfLives
+        }
         let qref = Database.database().reference().child("questions")
         qref.observeSingleEvent(of: .value, with: {(snapshot) in
             if let value = snapshot.value as? [String: NSArray]{
-                print(value)
-                //let jsonDecoder = JSONDecoder()
                 let quizData = value[self.quizName]
                 var questions = [Question]()
                 for questionData in quizData ?? NSArray() {
@@ -38,6 +39,7 @@ class QuizGameController: UIViewController {
                 }
                 print(questions)
                 self.quiz.addQuestions(q: questions)
+                self.quiz.mQuestions.shuffle()
                 self.updateUI()
                 
             } else {
@@ -48,23 +50,18 @@ class QuizGameController: UIViewController {
             print(error)
             print(error.localizedDescription)
         }
-        // Do any additional setup after loading the view.
-        
     }
     @IBAction func buttonTaped(_ sender:UIButton){
         let letter = sender.titleLabel?.text ?? ""
         print(letter)
         quiz.mLetterGuessed.append(letter)
         if !quiz.getQuestion(index: quiz.mCurrentQuestion).mAnswer.contains(letter.uppercased()) && !quiz.getQuestion(index: quiz.mCurrentQuestion).mAnswer.contains(letter.lowercased()){
-            do{
-                if let url = Bundle.main.url(forResource: "doh", withExtension: "mp3"){
-                    player = try AVAudioPlayer(contentsOf: url)
-                    player.play()
-                }
-            } catch {
-                print("Error\n")
-            }
+            playSound(name: "doh", withExtension: "mp3")
             quiz.mLives-=1
+            if quiz.mLives == 0 {
+                endGame()
+                enableKeyboard(state: false)
+            }
         }
         sender.isEnabled = false
         self.updateUI()
@@ -72,44 +69,20 @@ class QuizGameController: UIViewController {
     }
     @IBAction func NextQuestionTap(_ sender: Any) {
         quiz.mLetterGuessed.removeAll()
-        quiz.mCurrentQuestion+=1
         quiz.mScore += 1
-        
-        if(quiz.mCurrentQuestion >= quiz.mMaxQuestion || quiz.mCurrentQuestion >= numberOfQuestions){
-            let alert = UIAlertController(title: "Enter Score", message: "Please Enter Your Name", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                NSLog("The \"OK\" alert occured.")
-                print(alert.textFields![0].text! as String)
-                do{
-                    
-                    let quizData: [String: String] = ["Name":alert.textFields![0].text! as String, "Score": String(self.quiz.mScore)]
-                    //create encoder then encode
-                    let jsonEncoder = JSONEncoder()
-                    let jsonData: Data = try jsonEncoder.encode(quizData)
-                    //Use this is serialize to jsonObject
-                    let json = try JSONSerialization.jsonObject(with: jsonData, options:[]) as! [String: String]
-                    let qref = Database.database().reference()
-                    qref.child("score").child(self.quizName).childByAutoId().setValue(json)
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }))
-            alert.addTextField { (TextField) in
-                TextField.placeholder = "Enter Your Name"
-            }
-            self.present(alert, animated: true, completion: nil)
-            
+        if(quiz.mCurrentQuestion >= quiz.mMaxQuestion - 1 || quiz.mCurrentQuestion >= numberOfQuestions - 1){
+            endGame()
+            enableKeyboard(state: false)
         } else {
-            for button in AlphabetSoup{
-                button.isEnabled = true
-                updateUI()
-            }
+            quiz.mCurrentQuestion+=1
+            enableKeyboard(state: true)
         }
-        
-        
     }
     func updateUI(){
+        var answerDisplayed: String = ""
+        var wordComplete: Bool = true
         LivesLabel.text = String(repeating: "❤️", count: quiz.mLives)
+        
         if(HintLabel.text != quiz.getQuestion(index: quiz.mCurrentQuestion).mHint){
             //Fade Out
             UIView.animate(withDuration: 1.0, delay: 0.0, options: UIView.AnimationOptions.curveEaseOut, animations: {
@@ -124,8 +97,6 @@ class QuizGameController: UIViewController {
             })
         }
         ScoreLabel.text = String(quiz.mScore)
-        var answerDisplayed: String = ""
-        var wordComplete: Bool = true
         for char in quiz.getQuestion(index: quiz.mCurrentQuestion).mAnswer{
             //print("char:" + String(char))
             if quiz.mLetterGuessed.contains(String(char).lowercased()) || quiz.mLetterGuessed.contains(String(char).uppercased()){
@@ -141,18 +112,52 @@ class QuizGameController: UIViewController {
         }
         AnswerLabel.text = answerDisplayed
         if(wordComplete){
-            do{
-                if let url = Bundle.main.url(forResource: "woohoo", withExtension: "mp3"){
-                    player = try AVAudioPlayer(contentsOf: url)
-                    player.play()
-                }
-            } catch {
-                print("Error\n")
-            }
+            playSound(name: "woohoo", withExtension: "mp3")
             NextQuestion.isEnabled=true
         } else {
             NextQuestion.isEnabled=false
         }
     }
-    
+    func endGame(){
+        let alert = UIAlertController(title: "Enter Score", message: "Please Enter Your Name", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+            print(alert.textFields![0].text! as String)
+            do{
+                let quizData: [String: String] = ["Name":alert.textFields![0].text! as String, "Score": String(self.quiz.mScore)]
+                //create encoder then encode
+                let jsonEncoder = JSONEncoder()
+                let jsonData: Data = try jsonEncoder.encode(quizData)
+                //Use this is serialize to jsonObject
+                let json = try JSONSerialization.jsonObject(with: jsonData, options:[]) as! [String: String]
+                let qref = Database.database().reference()
+                qref.child("score").child(self.quizName).childByAutoId().setValue(json)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }))
+        alert.addTextField { (TextField) in
+            TextField.placeholder = "Enter Your Name"
+        }
+        self.present(alert, animated: true, completion: nil)
+        enableKeyboard(state: false)
+        
+    }
+    //Enable or Disable KeyBoard
+    func enableKeyboard(state: Bool){
+        for button in AlphabetSoup{
+            button.isEnabled = state
+            updateUI()
+        }
+    }
+    //Plays a sound
+    func playSound(name: String, withExtension: String){
+        do{
+            if let url = Bundle.main.url(forResource: name, withExtension: withExtension){
+                player = try AVAudioPlayer(contentsOf: url)
+                player.play()
+            }
+        } catch {
+            print("Error\n")
+        }
+    }
 }
