@@ -8,17 +8,20 @@
 
 import UIKit
 import FirebaseDatabase
+import AVFoundation
 
 class QuizGameController: UIViewController {
     @IBOutlet var AlphabetSoup: [UIButton]!
     @IBOutlet weak var NextQuestion: UIButton!
+    @IBOutlet weak var ScoreLabel: UILabel!
+    @IBOutlet weak var LivesLabel: UILabel!
+    @IBOutlet weak var HintLabel: UILabel!
+    @IBOutlet weak var AnswerLabel: UILabel!
     public var quiz: Quiz = Quiz()
     var quizName = ""
     var numberOfQuestions = 5
     var numberOfLives = 3
-    @IBOutlet weak var LivesLabel: UILabel!
-    @IBOutlet weak var HintLabel: UILabel!
-    @IBOutlet weak var AnswerLabel: UILabel!
+    var player: AVAudioPlayer!
     override func viewDidLoad() {
         super.viewDidLoad()
         print(quizName)
@@ -53,16 +56,25 @@ class QuizGameController: UIViewController {
         print(letter)
         quiz.mLetterGuessed.append(letter)
         if !quiz.getQuestion(index: quiz.mCurrentQuestion).mAnswer.contains(letter.uppercased()) && !quiz.getQuestion(index: quiz.mCurrentQuestion).mAnswer.contains(letter.lowercased()){
+            do{
+                if let url = Bundle.main.url(forResource: "doh", withExtension: "mp3"){
+                    player = try AVAudioPlayer(contentsOf: url)
+                    player.play()
+                }
+            } catch {
+                print("Error\n")
+            }
             quiz.mLives-=1
         }
         sender.isEnabled = false
-        print(quiz.mLetterGuessed)
         self.updateUI()
         
     }
     @IBAction func NextQuestionTap(_ sender: Any) {
         quiz.mLetterGuessed.removeAll()
         quiz.mCurrentQuestion+=1
+        quiz.mScore += 1
+        
         if(quiz.mCurrentQuestion >= quiz.mMaxQuestion || quiz.mCurrentQuestion >= numberOfQuestions){
             let alert = UIAlertController(title: "Enter Score", message: "Please Enter Your Name", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
@@ -89,7 +101,6 @@ class QuizGameController: UIViewController {
             
         } else {
             for button in AlphabetSoup{
-                print(button.titleLabel?.text)
                 button.isEnabled = true
                 updateUI()
             }
@@ -99,14 +110,26 @@ class QuizGameController: UIViewController {
     }
     func updateUI(){
         LivesLabel.text = String(repeating: "❤️", count: quiz.mLives)
-        HintLabel.text = quiz.getQuestion(index: quiz.mCurrentQuestion).mHint
-        AnswerLabel.text = quiz.getQuestion(index: quiz.mCurrentQuestion).mAnswer
+        if(HintLabel.text != quiz.getQuestion(index: quiz.mCurrentQuestion).mHint){
+            //Fade Out
+            UIView.animate(withDuration: 1.0, delay: 0.0, options: UIView.AnimationOptions.curveEaseOut, animations: {
+                self.HintLabel.alpha = 0.0
+            }, completion: {
+                (finished: Bool) -> Void in
+                self.HintLabel.text = self.quiz.getQuestion(index: self.quiz.mCurrentQuestion).mHint
+                // Fade in
+                UIView.animate(withDuration: 1.0, delay: 0.0, options: UIView.AnimationOptions.curveEaseIn, animations: {
+                    self.HintLabel.alpha = 1.0
+                }, completion: nil)
+            })
+        }
+        ScoreLabel.text = String(quiz.mScore)
         var answerDisplayed: String = ""
         var wordComplete: Bool = true
         for char in quiz.getQuestion(index: quiz.mCurrentQuestion).mAnswer{
-            print("char:" + String(char))
+            //print("char:" + String(char))
             if quiz.mLetterGuessed.contains(String(char).lowercased()) || quiz.mLetterGuessed.contains(String(char).uppercased()){
-                print("char exists")
+                //print("char exists")
                 answerDisplayed += (String(char) + " ")
             } else if (char == " "){
                 answerDisplayed += (" ")
@@ -118,6 +141,14 @@ class QuizGameController: UIViewController {
         }
         AnswerLabel.text = answerDisplayed
         if(wordComplete){
+            do{
+                if let url = Bundle.main.url(forResource: "woohoo", withExtension: "mp3"){
+                    player = try AVAudioPlayer(contentsOf: url)
+                    player.play()
+                }
+            } catch {
+                print("Error\n")
+            }
             NextQuestion.isEnabled=true
         } else {
             NextQuestion.isEnabled=false
