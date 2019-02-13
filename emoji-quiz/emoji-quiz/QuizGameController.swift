@@ -14,6 +14,8 @@ class QuizGameController: UIViewController {
     @IBOutlet weak var NextQuestion: UIButton!
     public var quiz: Quiz = Quiz()
     var quizName = ""
+    var numberOfQuestions = 5
+    var numberOfLives = 3
     @IBOutlet weak var LivesLabel: UILabel!
     @IBOutlet weak var HintLabel: UILabel!
     @IBOutlet weak var AnswerLabel: UILabel!
@@ -49,32 +51,61 @@ class QuizGameController: UIViewController {
     @IBAction func buttonTaped(_ sender:UIButton){
         let letter = sender.titleLabel?.text ?? ""
         print(letter)
-        quiz.letterGuessed.append(letter)
-        if !quiz.getQuestion(index: quiz.currentQuestion).mAnswer.contains(letter.uppercased()) && !quiz.getQuestion(index: quiz.currentQuestion).mAnswer.contains(letter.lowercased()){
+        quiz.mLetterGuessed.append(letter)
+        if !quiz.getQuestion(index: quiz.mCurrentQuestion).mAnswer.contains(letter.uppercased()) && !quiz.getQuestion(index: quiz.mCurrentQuestion).mAnswer.contains(letter.lowercased()){
             quiz.mLives-=1
         }
         sender.isEnabled = false
-        print(quiz.letterGuessed)
+        print(quiz.mLetterGuessed)
         self.updateUI()
         
     }
     @IBAction func NextQuestionTap(_ sender: Any) {
-        quiz.letterGuessed.removeAll()
-        quiz.currentQuestion+=1
-        for button in AlphabetSoup{
-            button.isEnabled = true
+        quiz.mLetterGuessed.removeAll()
+        quiz.mCurrentQuestion+=1
+        if(quiz.mCurrentQuestion >= quiz.mMaxQuestion || quiz.mCurrentQuestion >= numberOfQuestions){
+            let alert = UIAlertController(title: "Enter Score", message: "Please Enter Your Name", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                NSLog("The \"OK\" alert occured.")
+                print(alert.textFields![0].text! as String)
+                do{
+                    
+                    let quizData: [String: String] = ["Name":alert.textFields![0].text! as String, "Score": String(self.quiz.mScore)]
+                    //create encoder then encode
+                    let jsonEncoder = JSONEncoder()
+                    let jsonData: Data = try jsonEncoder.encode(quizData)
+                    //Use this is serialize to jsonObject
+                    let json = try JSONSerialization.jsonObject(with: jsonData, options:[]) as! [String: String]
+                    let qref = Database.database().reference()
+                    qref.child("score").child(self.quizName).childByAutoId().setValue(json)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }))
+            alert.addTextField { (TextField) in
+                TextField.placeholder = "Enter Your Name"
+            }
+            self.present(alert, animated: true, completion: nil)
+            
+        } else {
+            for button in AlphabetSoup{
+                print(button.titleLabel?.text)
+                button.isEnabled = true
+                updateUI()
+            }
         }
-        updateUI()
+        
+        
     }
     func updateUI(){
         LivesLabel.text = String(repeating: "❤️", count: quiz.mLives)
-        HintLabel.text = quiz.getQuestion(index: quiz.currentQuestion).mHint
-        AnswerLabel.text = quiz.getQuestion(index: quiz.currentQuestion).mAnswer
+        HintLabel.text = quiz.getQuestion(index: quiz.mCurrentQuestion).mHint
+        AnswerLabel.text = quiz.getQuestion(index: quiz.mCurrentQuestion).mAnswer
         var answerDisplayed: String = ""
         var wordComplete: Bool = true
-        for char in quiz.getQuestion(index: quiz.currentQuestion).mAnswer{
+        for char in quiz.getQuestion(index: quiz.mCurrentQuestion).mAnswer{
             print("char:" + String(char))
-            if quiz.letterGuessed.contains(String(char).lowercased()) || quiz.letterGuessed.contains(String(char).uppercased()){
+            if quiz.mLetterGuessed.contains(String(char).lowercased()) || quiz.mLetterGuessed.contains(String(char).uppercased()){
                 print("char exists")
                 answerDisplayed += (String(char) + " ")
             } else if (char == " "){

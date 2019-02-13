@@ -18,8 +18,10 @@ struct Quiz: Codable{
     var mLives: Int=3
     var mScore: Int=0
     var mQuestions: [Question]=[]
-    var currentQuestion: Int = 0
-    var letterGuessed: String = ""
+    var mCurrentQuestion: Int = 0
+    var mMaxQuestion: Int = 5
+    var mMaxLives: Int = 3
+    var mLetterGuessed: String = ""
     //Question Methods
     mutating func addQuestion(q: Question)->Void{
         self.mQuestions.append(q)

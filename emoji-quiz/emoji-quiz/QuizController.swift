@@ -14,6 +14,8 @@ class QuizController: UIViewController {
     @IBOutlet weak var QuizNameLabel: UILabel!
     @IBOutlet weak var LivesLabel: UILabel!
     @IBOutlet weak var QuestionLabel: UILabel!
+    @IBOutlet weak var LivesStepper: UIStepper!
+    @IBOutlet weak var QuestionStepper: UIStepper!
     
     var ref: DatabaseReference!
     var quiz: Quiz = Quiz()
@@ -121,7 +123,15 @@ class QuizController: UIViewController {
             let vc = segue.destination as! QuizGameController
             let name = QuizNameLabel.text?.lowercased() ?? "movies"
             vc.quizName = name
+            vc.numberOfLives = Int(LivesStepper.value)
+            vc.numberOfQuestions = Int(QuestionStepper.value)
         }
     }
     
+    @IBAction func LivesStep(_ sender: UIStepper) {
+        LivesLabel.text=String(sender.value)
+    }
+    @IBAction func QuestionStep(_ sender: UIStepper) {
+        QuestionLabel.text=String(sender.value)
+    }
 }

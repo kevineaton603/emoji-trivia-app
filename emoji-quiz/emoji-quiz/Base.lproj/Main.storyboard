@@ -37,7 +37,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H34-tX-SRm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="486" y="135"/>
+            <point key="canvasLocation" x="438" y="479"/>
         </scene>
         <!--QuizController-->
         <scene sceneID="mGF-xf-8CU">
@@ -71,9 +71,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="7OE-kb-SVN">
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="3" minimumValue="1" maximumValue="3" translatesAutoresizingMaskIntoConstraints="NO" id="7OE-kb-SVN">
                                 <rect key="frame" x="227" y="268" width="94" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="LivesStep:" destination="lSu-3P-wo5" eventType="valueChanged" id="T5Q-4s-TGh"/>
+                                </connections>
                             </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1o8-fV-haG">
                                 <rect key="frame" x="114" y="370" width="11" height="21"/>
@@ -82,9 +85,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" translatesAutoresizingMaskIntoConstraints="NO" id="TTN-OL-GLa">
+                            <stepper opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="5" minimumValue="1" maximumValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="TTN-OL-GLa">
                                 <rect key="frame" x="227" y="366" width="94" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="QuestionStep:" destination="lSu-3P-wo5" eventType="valueChanged" id="alq-BK-tyS"/>
+                                </connections>
                             </stepper>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Questions: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SMr-3n-poV">
                                 <rect key="frame" x="28" y="370" width="87" height="21"/>
@@ -121,7 +127,9 @@
                     <navigationItem key="navigationItem" id="wEj-x1-xYL"/>
                     <connections>
                         <outlet property="LivesLabel" destination="gmG-5y-Ink" id="Jrb-h5-McV"/>
+                        <outlet property="LivesStepper" destination="7OE-kb-SVN" id="G8v-2K-PHc"/>
                         <outlet property="QuestionLabel" destination="1o8-fV-haG" id="uLK-ju-Dx3"/>
+                        <outlet property="QuestionStepper" destination="TTN-OL-GLa" id="HHF-ha-NVo"/>
                         <outlet property="QuizNameLabel" destination="NSF-Ox-ql0" id="T86-TG-PUL"/>
                         <outlet property="QuizSelectorSegment" destination="yPd-Ge-1IT" id="B5Y-X1-4Oi"/>
                     </connections>
@@ -418,7 +426,7 @@
                         <outlet property="AnswerLabel" destination="olE-Tq-E52" id="0KM-H5-8Cm"/>
                         <outlet property="HintLabel" destination="ZFa-FU-cjL" id="y6h-X0-hBf"/>
                         <outlet property="LivesLabel" destination="D8F-m6-t9q" id="kTS-io-Dv7"/>
-                        <outlet property="NextQuestion" destination="lFJ-2h-wGn" id="ypx-bx-UKq"/>
+                        <outlet property="NextQuestion" destination="lFJ-2h-wGn" id="O31-2W-ZUY"/>
                         <outletCollection property="AlphabetSoup" destination="x75-9s-9lB" collectionClass="NSMutableArray" id="TEK-Jt-MTc"/>
                         <outletCollection property="AlphabetSoup" destination="tIl-f8-6gB" collectionClass="NSMutableArray" id="RsW-by-ZGU"/>
                         <outletCollection property="AlphabetSoup" destination="b49-NZ-vE0" collectionClass="NSMutableArray" id="3aV-Ic-AoU"/>
@@ -434,6 +442,25 @@
                         <outletCollection property="AlphabetSoup" destination="j32-3w-FLZ" collectionClass="NSMutableArray" id="0GB-6H-ad4"/>
                         <outletCollection property="AlphabetSoup" destination="jFh-2j-Nwf" collectionClass="NSMutableArray" id="ayj-pb-IUu"/>
                         <outletCollection property="AlphabetSoup" destination="6e8-Zg-dGj" collectionClass="NSMutableArray" id="0ee-wu-gIV"/>
+                        <outletCollection property="AlphabetSoup" destination="b49-NZ-vE0" collectionClass="NSMutableArray" id="vtR-XG-32g"/>
+                        <outletCollection property="AlphabetSoup" destination="hOh-gm-bWd" collectionClass="NSMutableArray" id="mZv-Hg-jRy"/>
+                        <outletCollection property="AlphabetSoup" destination="TJc-uB-YzR" collectionClass="NSMutableArray" id="xOp-yz-U70"/>
+                        <outletCollection property="AlphabetSoup" destination="mbi-oH-7MG" collectionClass="NSMutableArray" id="1Xl-oq-oB7"/>
+                        <outletCollection property="AlphabetSoup" destination="mbi-oH-7MG" collectionClass="NSMutableArray" id="Zfj-2z-xUg"/>
+                        <outletCollection property="AlphabetSoup" destination="DJ0-rO-T3g" collectionClass="NSMutableArray" id="ptb-Sp-vYd"/>
+                        <outletCollection property="AlphabetSoup" destination="wW8-T1-eGU" collectionClass="NSMutableArray" id="98V-hc-ENr"/>
+                        <outletCollection property="AlphabetSoup" destination="zA9-Mt-fv9" collectionClass="NSMutableArray" id="ras-k6-9TY"/>
+                        <outletCollection property="AlphabetSoup" destination="1pA-hY-4P4" collectionClass="NSMutableArray" id="6p3-b5-Whe"/>
+                        <outletCollection property="AlphabetSoup" destination="Uea-iO-j7a" collectionClass="NSMutableArray" id="te9-g4-C3M"/>
+                        <outletCollection property="AlphabetSoup" destination="Ujh-Np-ILV" collectionClass="NSMutableArray" id="uJM-Dd-iWT"/>
+                        <outletCollection property="AlphabetSoup" destination="hOh-gm-bWd" collectionClass="NSMutableArray" id="dnf-zx-FIM"/>
+                        <outletCollection property="AlphabetSoup" destination="dPQ-Ja-of7" collectionClass="NSMutableArray" id="YWL-UU-rA0"/>
+                        <outletCollection property="AlphabetSoup" destination="qNB-nw-ICY" collectionClass="NSMutableArray" id="hgu-3a-yJI"/>
+                        <outletCollection property="AlphabetSoup" destination="WjU-tI-vs6" collectionClass="NSMutableArray" id="Yne-Wj-ycR"/>
+                        <outletCollection property="AlphabetSoup" destination="mbi-oH-7MG" collectionClass="NSMutableArray" id="RaE-Ts-PuM"/>
+                        <outletCollection property="AlphabetSoup" destination="ltV-mw-TuT" collectionClass="NSMutableArray" id="NvG-2Q-cbN"/>
+                        <outletCollection property="AlphabetSoup" destination="osc-SG-nbu" collectionClass="NSMutableArray" id="Cih-49-LKe"/>
+                        <outletCollection property="AlphabetSoup" destination="TJc-uB-YzR" collectionClass="NSMutableArray" id="YIp-P7-7Ia"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="clh-Gv-NB7" userLabel="First Responder" sceneMemberID="firstResponder"/>
