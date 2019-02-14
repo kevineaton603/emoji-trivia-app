@@ -11,10 +11,11 @@ import FirebaseDatabase
 
 class HighScoreViewController: UIViewController, UITableViewDelegate, UITableViewDataSource
 {
+    //Table View Function
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.HighScoreList.count
     }
-    
+    //Table View Function
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("In Table View")
         var cell: UITableViewCell = self.HighScoreTable.dequeueReusableCell(withIdentifier: "cell") as! UITableViewCell
@@ -24,11 +25,6 @@ class HighScoreViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.textLabel?.text = cellInfo["Name"]! + "  " + cellInfo["Score"]!
         return cell
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-    }
-    
-
     @IBOutlet weak var HighScoreTable: UITableView!
     @IBOutlet weak var HighScores: UILabel!
     @IBOutlet weak var QuizSelectorSegment: UISegmentedControl!
@@ -57,6 +53,7 @@ class HighScoreViewController: UIViewController, UITableViewDelegate, UITableVie
     func updateView(selector: String){
         let quizHighScore = self.databaseRef.child("score").child(selector.lowercased() as String)
         self.HighScoreList.removeAll()
+        //Gets the high score from the database
         quizHighScore.observeSingleEvent(of: .value, with: {(snapshot) in
             if let value = snapshot.value as? [String: Any]{
                 for (index, element) in value.enumerated(){
@@ -65,16 +62,17 @@ class HighScoreViewController: UIViewController, UITableViewDelegate, UITableVie
                     let name = info.value(forKey: "Name") as! String
                     let score = info.value(forKey: "Score") as! String
                     self.HighScoreList.append(["Name": name, "Score": score])
-                    print(info.value(forKey: "Name")!)
                     
                 }
+                //Sorts List if more than two elements exist
                 if self.HighScoreList.count >= 2 {
                     self.HighScoreList = self.HighScoreList.sorted{$0["Score"]! > $1["Score"]!}
                 }
-                print(self.HighScoreList)
+                //Reloads the table
                 self.HighScoreTable.reloadData()
                 
             } else {
+                //Displays if there is no high score
                 self.HighScoreList.append(["Name": "No High Score Yet", "Score": ""])
                 print("Value Error\n\n")
                 self.HighScoreTable.reloadData()

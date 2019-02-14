@@ -37,7 +37,7 @@
 		D36FCFC72213E0CE002055F0 /* woohoo.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = woohoo.mp3; sourceTree = "<group>"; };
 		D36FCFC92213E0D9002055F0 /* doh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = doh.mp3; sourceTree = "<group>"; };
 		D3918F6322112CD60036F3B1 /* QuizGameController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizGameController.swift; sourceTree = "<group>"; };
-		D3FB204022110998009C91A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D3FB204022110998009C91A1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */

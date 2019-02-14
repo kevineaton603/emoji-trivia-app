@@ -29,9 +29,8 @@
                                     <action selector="indexChanged:" destination="lSu-3P-wo5" eventType="valueChanged" id="JKp-GI-VYO"/>
                                 </connections>
                             </segmentedControl>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EoF-AT-IJm">
-                                <rect key="frame" x="0.0" y="102" width="375" height="516"/>
-                                <autoresizingMask key="autoresizingMask"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="EoF-AT-IJm">
+                                <rect key="frame" x="0.0" y="118" width="375" height="500"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="iKf-R9-Wqo">
@@ -64,7 +63,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="EoF-AT-IJm" firstAttribute="leading" secondItem="FTi-Cf-fLJ" secondAttribute="leading" id="5xl-uP-ICv"/>
+                            <constraint firstItem="EoF-AT-IJm" firstAttribute="centerX" secondItem="FTi-Cf-fLJ" secondAttribute="centerX" id="76b-Ij-VQN"/>
+                            <constraint firstItem="FTi-Cf-fLJ" firstAttribute="bottom" secondItem="EoF-AT-IJm" secondAttribute="bottom" id="JnX-55-uqx"/>
                             <constraint firstItem="zeK-dk-2ht" firstAttribute="top" secondItem="FTi-Cf-fLJ" secondAttribute="top" constant="46" id="VV6-O7-tf4"/>
+                            <constraint firstItem="EoF-AT-IJm" firstAttribute="height" secondItem="WES-n1-YcQ" secondAttribute="height" multiplier="0.75" id="tcd-Pz-ruu"/>
                             <constraint firstItem="zeK-dk-2ht" firstAttribute="centerX" secondItem="FTi-Cf-fLJ" secondAttribute="centerX" id="yAX-lP-pOI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="FTi-Cf-fLJ"/>

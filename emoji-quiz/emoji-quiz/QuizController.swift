@@ -19,9 +19,6 @@ class QuizController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-    }
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         if (QuizSelectorSegment.numberOfSegments != 3){
@@ -41,6 +38,7 @@ class QuizController: UIViewController {
             break
         }
     }
+    //Prepares Segue to QuizGameConntroller
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.destination is QuizGameController{
             let vc = segue.destination as! QuizGameController

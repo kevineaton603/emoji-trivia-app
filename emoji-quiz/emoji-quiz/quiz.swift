@@ -63,4 +63,5 @@ struct Quiz: Codable{
         mScore = 0
         clearQuestions()
     }
+    
 }
